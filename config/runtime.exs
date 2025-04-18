@@ -67,6 +67,46 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  s3_access_key_id =
+    System.get_env("S3_ACCESS_KEY_ID") ||
+      raise """
+      S3 Access key is missing
+      """
+
+  s3_secret_access_key =
+    System.get_env("S3_SECRET_ACCESS_KEY") ||
+      raise """
+      S3 Secret Access key is missing
+      """
+
+  s3_bucket_name =
+    System.get_env("S3_BUCKET_NAME") ||
+      raise """
+      S3 Bucket name is missing
+      """
+
+  s3_bucket_region =
+    System.get_env("S3_BUCKET_REGION") ||
+      raise """
+      S3 Bucket Region is missing
+      """
+
+  config :mgc,
+    s3_access_key_id: s3_access_key_id,
+    s3_secret_access_key: s3_secret_access_key,
+    s3_bucket_name: s3_bucket_name,
+    s3_bucket_region: s3_bucket_region
+
+  config :ex_aws,
+    json_codec: Jason,
+    access_key_id: s3_access_key_id,
+    secret_access_key: s3_secret_access_key
+
+  config :ex_aws, :s3,
+    scheme: "https://",
+    host: "#{s3_bucket_region}.digitaloceanspaces.com",
+    region: s3_bucket_region
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
