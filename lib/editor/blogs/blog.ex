@@ -5,6 +5,7 @@ defmodule Editor.Blogs.Blog do
   schema "blogs" do
     field :title, :string
     field :content, :string
+    field :meta, :map
 
     timestamps(type: :utc_datetime)
   end
@@ -12,7 +13,8 @@ defmodule Editor.Blogs.Blog do
   @doc false
   def changeset(blog, attrs) do
     blog
-    |> cast(attrs, [:title, :content])
+    |> cast(attrs, [:title, :content, :meta])
     |> validate_required([:title, :content])
+    |> validate_length(:content, min: 10)
   end
 end
