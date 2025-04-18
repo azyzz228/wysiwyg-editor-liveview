@@ -1,10 +1,10 @@
 defmodule Editor.S3Config do
   def bucket() do
-    Application.get_env(:mgc, :s3_bucket_name)
+    Application.get_env(:editor, :s3_bucket_name)
   end
 
   def region() do
-    Application.get_env(:mgc, :s3_bucket_region)
+    Application.get_env(:editor, :s3_bucket_region)
   end
 
   def cdn_host() do
