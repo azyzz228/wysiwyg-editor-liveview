@@ -1,5 +1,7 @@
 # Editor
 
+Note: postgresql is running on 5433 port instead of 5432 on dev
+
 To start your Phoenix server:
 
 * Run `mix setup` to install and setup dependencies
