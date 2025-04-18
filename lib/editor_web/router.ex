@@ -18,6 +18,8 @@ defmodule EditorWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/blogs/new", BlogCreateLive
+    live "/blogs/:id", BlogShowLive
   end
 
   # Other scopes may use custom stacks.
